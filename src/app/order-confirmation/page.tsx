@@ -10,6 +10,7 @@ function OrderConfirmationContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
   const paymentId = searchParams.get("paymentId");
+  const shopifyOrder = searchParams.get("shopifyOrder");
 
   return (
     <div className="pt-28 pb-24">
@@ -51,6 +52,14 @@ function OrderConfirmationContent() {
           </div>
 
           <div className="space-y-3">
+            {shopifyOrder && (
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Order Number</span>
+                <span className="font-mono font-semibold text-xs">
+                  {shopifyOrder}
+                </span>
+              </div>
+            )}
             {orderId && (
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Order ID</span>
