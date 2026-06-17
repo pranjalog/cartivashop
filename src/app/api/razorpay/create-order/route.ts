@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   const keyId = process.env.RAZORPAY_KEY_ID;
   const keySecret = process.env.RAZORPAY_KEY_SECRET;
+  console.log("ENV CHECK:", { keyId: !!keyId, keySecret: !!keySecret });
 
   if (!keyId || !keySecret) {
     return NextResponse.json(
