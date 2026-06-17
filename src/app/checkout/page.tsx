@@ -135,15 +135,36 @@ export default function CheckoutPage() {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
+              email: formData.email,
+              shippingPrice: shippingCost,
+              shipping: {
+                name: formData.name,
+                phone: formData.phone,
+                address: formData.address,
+                city: formData.city,
+                state: formData.state,
+                pincode: formData.pincode,
+              },
+              lineItems: items.map((item) => ({
+                title: item.product.name,
+                price: item.product.price,
+                quantity: item.quantity,
+                variantTitle: item.selectedColor,
+              })),
             }),
           });
 
           const result = await verifyRes.json();
           if (result.verified) {
             clearCart();
-            router.push(
-              `/order-confirmation?orderId=${response.razorpay_order_id}&paymentId=${response.razorpay_payment_id}`
-            );
+            const params = new URLSearchParams({
+              orderId: response.razorpay_order_id,
+              paymentId: response.razorpay_payment_id,
+            });
+            if (result.shopifyOrderName) {
+              params.set("shopifyOrder", result.shopifyOrderName);
+            }
+            router.push(`/order-confirmation?${params.toString()}`);
           } else {
             alert("Payment verification failed. Please contact support.");
           }
