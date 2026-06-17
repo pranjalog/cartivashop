@@ -12,12 +12,22 @@ export async function POST(request: Request) {
       );
     }
 
-    const keyId = process.env.RAZORPAY_KEY_ID;
+    // Try both variable names to handle any naming inconsistency
+    const keyId =
+      process.env.RAZORPAY_KEY_ID ||
+      process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
     if (!keyId || !keySecret) {
       return NextResponse.json(
-        { error: "Payment gateway is not configured" },
+        {
+          error: "Payment gateway is not configured",
+          debug: {
+            hasKeyId: !!process.env.RAZORPAY_KEY_ID,
+            hasPublicKeyId: !!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+            hasSecret: !!process.env.RAZORPAY_KEY_SECRET,
+          },
+        },
         { status: 500 }
       );
     }
@@ -25,7 +35,7 @@ export async function POST(request: Request) {
     const razorpay = new Razorpay({ key_id: keyId, key_secret: keySecret });
 
     const order = await razorpay.orders.create({
-      amount: Math.round(amount * 100), // Razorpay expects paise
+      amount: Math.round(amount * 100),
       currency,
       receipt: receipt || `receipt_${Date.now()}`,
     });
