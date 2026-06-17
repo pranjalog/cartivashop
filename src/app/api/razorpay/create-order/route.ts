@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 
     if (!amount || amount <= 0) {
       return NextResponse.json(
-        { error: "Invalid amount" },
+        { error: "Invalid  amount" },
         { status: 400 }
       );
     }
