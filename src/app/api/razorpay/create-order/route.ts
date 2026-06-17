@@ -15,17 +15,13 @@ export async function POST(request: Request) {
       hasKeySecret: !!keySecret,
     });
     return NextResponse.json(
-      {
-        error:
-          "Payment gateway is not configured. Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in Vercel → Settings → Environment Variables and redeploy.",
-      },
+      { error: "Payment gateway is not configured. Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in Vercel → Settings → Environment Variables and redeploy." },
       { status: 500 }
     );
   }
 
   try {
     const { amount, currency = "INR", receipt } = await request.json();
-
     if (!amount || typeof amount !== "number" || amount <= 0) {
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
@@ -44,8 +40,7 @@ export async function POST(request: Request) {
     });
   } catch (error: unknown) {
     console.error("[razorpay] create-order failed:", error);
-    const message =
-      error instanceof Error ? error.message : "Failed to create order";
+    const message = error instanceof Error ? error.message : "Failed to create order";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
