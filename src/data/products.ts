@@ -22,15 +22,15 @@ export const products: Product[] = [
     reviewCount: 2847,
     inStock: true,
     featured: true,
-    colors: ["Rose Gold", "Matte Black", "Lavender"],
+    colors: ["Rose pink"],
     specs: {
       "Battery Life": "Up to 6 hours",
       Charging: "USB-C Fast Charge",
       "Vibration Modes": "4 (Pulse, Wave, Constant, Soothe)",
       "Heating Mode": "Yes — 38°C – 45°C adjustable",
-      "Intensity Levels": "10",
+      "Intensity Levels": "4",
       Weight: "120g",
-      Material: "Medical-grade silicone",
+      Material: "Medical-grade Plastic",
     },
   },
   {
@@ -164,10 +164,10 @@ export const products: Product[] = [
     id: "7",
     name: "CartivaCare Complete Relief Bundle",
     slug: "cartiva-care-complete-relief-bundle",
-    price: 699,
-    originalPrice: 1799,
+    price: 1399,
+    originalPrice: 1999,
     description:
-      "Everything you need in one bundle. Includes: Period Cramp Massager, Heating Pad Belt, Aromatherapy Roll-On, and Comfort Tea Collection. Save over 60% compared to buying individually. The ultimate self-care package for your toughest days.",
+      "Everything you need in one bundle. Includes: Period Cramp Massager, Heating Pad Belt and Aromatherapy Roll-On. Save over 60% compared to buying individually. The ultimate self-care package for your toughest days.",
     shortDescription:
       "4-piece bundle: Massager + Heating Belt + Aromatherapy + Tea. Save 60%+.",
     images: ["/products/bundle-1.jpg", "/products/bundle-2.jpg"],
@@ -179,7 +179,7 @@ export const products: Product[] = [
     featured: true,
     specs: {
       Includes:
-        "Massager, Heating Belt, Roll-On, Tea Collection",
+        "Massager, Heating Belt, Roll-On",
       Savings: "Over 60%",
       "Gift Ready": "Premium packaging included",
     },
